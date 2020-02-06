@@ -1,26 +1,30 @@
 $(document).ready(function (){
-  var query = 'ritorno al futuro';
-  $.ajax(
-    {
-      url: 'https://api.themoviedb.org/3/search/movie',
-      method: 'GET',
-      data: {
-        api_key: 'ed6b74196763d1becc194df37b95d2fd',
-        query: query
-      },
-      success: function (data) {
-        // console.log(data);
-        var films = data.results;
-        // console.log(films);
-        printfilms(films);
+  $(document).on('click', function (){
+    var query = $("input").val();
+    if(query != '') {
+      $.ajax(
+        {
+          url: 'https://api.themoviedb.org/3/search/movie',
+          method: 'GET',
+          data: {
+            api_key: 'ed6b74196763d1becc194df37b95d2fd',
+            query: query
+          },
+          success: function (data) {
+            console.log(data);
+            var films = data.results;
+            console.log(films);
+            printfilms(films);
 
-      },
-      error: function (request, state, errors) {
-        console.log(errors);
+          },
+          error: function (request, state, errors) {
+            console.log(errors);
 
-      }
-    });
+          }
+        });
+    }
 
+  });
 });
 
 function printfilms (films) {

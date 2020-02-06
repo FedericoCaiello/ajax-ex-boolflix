@@ -1,6 +1,7 @@
 $(document).ready(function (){
   $('button').on('click', function (){
-    var query = $("input").val();
+    var query = $("input").val().toLowerCase();
+    $('input').val('').focus();
     if(query != '') {
       $.ajax(
         {
@@ -15,11 +16,13 @@ $(document).ready(function (){
             var films = data.results;
             console.log(films);
             printFilms(films);
+            if(films.length == 0){
+              alert('la tua richiesta non ha prodotto risultati');
+            }
 
           },
           error: function (request, state, errors) {
             console.log(errors);
-
           }
         });
     }
@@ -27,6 +30,7 @@ $(document).ready(function (){
 });
 
 function printFilms (films) {
+  $('.cover').html('');
   var source = $("#entry-template").html();
   var template = Handlebars.compile(source);
 
@@ -41,7 +45,6 @@ function printFilms (films) {
      };
      var html = template(context);
      $('.cover').append(html);
-
   }
 }
 

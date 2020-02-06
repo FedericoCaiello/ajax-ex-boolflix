@@ -1,5 +1,5 @@
 $(document).ready(function (){
-  $(document).on('click', function (){
+  $('button').on('click', function (){
     var query = $("input").val();
     if(query != '') {
       $.ajax(
@@ -14,7 +14,7 @@ $(document).ready(function (){
             console.log(data);
             var films = data.results;
             console.log(films);
-            printfilms(films);
+            printFilms(films);
 
           },
           error: function (request, state, errors) {
@@ -23,11 +23,10 @@ $(document).ready(function (){
           }
         });
     }
-
   });
 });
 
-function printfilms (films) {
+function printFilms (films) {
   var source = $("#entry-template").html();
   var template = Handlebars.compile(source);
 
@@ -41,7 +40,7 @@ function printfilms (films) {
        vote_average: thisFilms.vote_average
      };
      var html = template(context);
-     $('.covers').append(html);
+     $('.cover').append(html);
 
   }
 }

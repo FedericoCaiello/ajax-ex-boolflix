@@ -1,5 +1,6 @@
 $(document).ready(function (){
   $('button').on('click', function (){
+    $('.cover').html('');
     var query = $("input").val().toLowerCase();
     $('input').val('').focus();
     if(query != '') {
@@ -12,14 +13,14 @@ $(document).ready(function (){
             query: query
           },
           success: function (data) {
+            console.log(query);
             console.log(data);
             var films = data.results;
             console.log(films);
-            printFilms(films);
+            printSerieTv(films);
             if(films.length == 0){
               // alert('la tua richiesta non ha prodotto risultati');
             }
-
           },
           error: function (request, state, errors) {
             console.log(errors);
@@ -34,6 +35,7 @@ $(document).ready(function (){
               query: query
             },
             success: function (data) {
+              console.log(query);
               console.log(data);
               var serieTv = data.results;
               console.log(serieTv);
@@ -50,33 +52,28 @@ $(document).ready(function (){
     }
   });
 });
-
 function printFilms (films) {
-  $('.cover').html('');
+  // $('.cover').html('');
   var source = $("#entry-template").html();
   var template = Handlebars.compile(source);
-
   for (var i = 0; i < films.length; i++) {
      var thisFilms = films[i];
-
      var context = {
        title: thisFilms.title,
        original_title: thisFilms.original_title,
        original_language:'img/flag-of-' + thisFilms.original_language + '.png',
        vote_average: printStars(thisFilms.vote_average),
-
      };
      var html = template(context);
      $('.cover').append(html);
   }
 }
 function printSerieTv (serie) {
-  $('.cover').html('');
+  // $('.cover').html('');
   var source = $("#second-template").html();
   var template = Handlebars.compile(source);
   for (var i = 0; i < serie.length; i++) {
      var questaSerie = serie[i];
-
      var context = {
        name: questaSerie.name,
        original_name: questaSerie.original_name,
@@ -87,7 +84,6 @@ function printSerieTv (serie) {
      $('.cover').append(html);
   }
 }
-
 function printStars(voto) {
   var voto = Math.round(voto / 2);
   var stelle = '';
@@ -100,4 +96,5 @@ function printStars(voto) {
     stelle += singolaStella;
   }
   return stelle;
+}
 }

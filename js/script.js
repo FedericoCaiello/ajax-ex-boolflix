@@ -1,7 +1,11 @@
 $(document).ready(function (){
+  // quando clicco nel bottone
   $('button').on('click', function (){
+    // nella classe dentro le ('.cover').html('') mi svuota il campo in html
     $('.cover').html('');
+    // quando inserisco qualcosa nell'input mi prende il valore .val().toLowerCase(), anche con l'iniziale in minuscolo
     var query = $("input").val().toLowerCase();
+    // nella barra dell'input quando clicco sul bottone svuoto il campo del valore .val('').focus
     $('input').val('').focus();
     if(query != '') {
       $.ajax(
@@ -13,10 +17,10 @@ $(document).ready(function (){
             query: query
           },
           success: function (data) {
-            console.log(query);
-            console.log(data);
+            // console.log(query);
+            // console.log(data);
             var films = data.results;
-            console.log(films);
+            // console.log(films);
             if(films.length > 0){
               printFilms(films);
 
@@ -35,8 +39,8 @@ $(document).ready(function (){
               query: query
             },
             success: function (data) {
-              console.log(query);
-              console.log(data);
+              // console.log(query);
+              // console.log(data);
               var serieTv = data.results;
               console.log(serieTv);
               if(serieTv.length > 0) {
@@ -51,6 +55,7 @@ $(document).ready(function (){
     }
   });
 });
+
 function printFilms (films) {
   var source = $("#entry-template").html();
   var template = Handlebars.compile(source);
@@ -96,7 +101,7 @@ function printStars(voto) {
   }
   return stelle;
 }
-
+// funzione con immagini del film o serie tv
 function posterPrint(poster) {
   var url = 'https://image.tmdb.org/t/p/w185';
   if (poster != null) {
@@ -106,7 +111,7 @@ function posterPrint(poster) {
   }
   return url;
 }
-
+// HTML escaping con le bandiere
 function printFlags(stringa) {
   var bandiere = [
     'en',

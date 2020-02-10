@@ -17,9 +17,9 @@ $(document).ready(function (){
             console.log(data);
             var films = data.results;
             console.log(films);
-            printSerieTv(films);
-            if(films.length == 0){
-              // alert('la tua richiesta non ha prodotto risultati');
+            if(films.length > 0){
+              printFilms(films);
+
             }
           },
           error: function (request, state, errors) {
@@ -39,9 +39,8 @@ $(document).ready(function (){
               console.log(data);
               var serieTv = data.results;
               console.log(serieTv);
-              printSerieTv(serieTv);
-              if(serieTv.length == 0) {
-                // alert('non sono stati trovati serieTv');
+              if(serieTv.length > 0) {
+                printSerieTv(serieTv);
               }
             },
             error: function (request, state, errors) {
@@ -53,7 +52,6 @@ $(document).ready(function (){
   });
 });
 function printFilms (films) {
-  // $('.cover').html('');
   var source = $("#entry-template").html();
   var template = Handlebars.compile(source);
   for (var i = 0; i < films.length; i++) {
@@ -61,15 +59,15 @@ function printFilms (films) {
      var context = {
        title: thisFilms.title,
        original_title: thisFilms.original_title,
-       original_language:'img/flag-of-' + thisFilms.original_language + '.png',
+       original_language:printFlags(thisFilms.original_language),
        vote_average: printStars(thisFilms.vote_average),
+       poster_path: posterPrint(thisFilms.poster_path)
      };
      var html = template(context);
      $('.cover').append(html);
   }
 }
 function printSerieTv (serie) {
-  // $('.cover').html('');
   var source = $("#second-template").html();
   var template = Handlebars.compile(source);
   for (var i = 0; i < serie.length; i++) {
@@ -77,8 +75,9 @@ function printSerieTv (serie) {
      var context = {
        name: questaSerie.name,
        original_name: questaSerie.original_name,
-       original_language:'img/flag-of-' + questaSerie.original_language + '.png',
-       vote_average: printStars(questaSerie.vote_average)
+       original_language:printFlags(questaSerie.original_language),
+       vote_average: printStars(questaSerie.vote_average),
+       poster_path: posterPrint(questaSerie.poster_path)
      };
      var html = template(context);
      $('.cover').append(html);
@@ -97,4 +96,27 @@ function printStars(voto) {
   }
   return stelle;
 }
+
+function posterPrint(poster) {
+  var url = 'https://image.tmdb.org/t/p/w185';
+  if (poster != null) {
+    url += poster;
+  }else {
+    url = 'img/image_not_found.png';
+  }
+  return url;
+}
+
+function printFlags(stringa) {
+  var bandiere = [
+    'en',
+    'it',
+    'fr',
+    'ru',
+    'zh'
+  ];
+  if (bandiere.includes(stringa)) {
+    stringa = '<img class="lang" src="img/flag-of-' + stringa + '.png" alt="language">';
+  }
+  return stringa;
 }

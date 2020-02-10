@@ -16,17 +16,24 @@
     </ul>
 
     <script id="entry-template" type="text/x-handlebars-template">
-      <li>tutti i film: {{title}} - {{original_title}} - <img src="{{original_language}}" alt=""></li>
+      <li>Film: {{title}} - {{original_title}} - {{{original_language}}}</li>
       <li>
         stars: {{{vote_average}}}
       </li>
+      <li>
+        <img src="{{{poster_path}}}" alt="">
+      </li>
+
 
     </script>
 
     <script id="second-template" type="text/x-handlebars-template">
-      <li>lista film serie: {{name}} - {{original_name}} - <img src="{{original_language}}" alt=""></li>
+      <li>serie tv: {{name}} - {{original_name}} - {{{original_language}}}</li>
       <li>
         stars: {{{vote_average}}}
+      </li>
+      <li>
+        <img src="{{{poster_path}}}" alt="">
       </li>
 
     </script>

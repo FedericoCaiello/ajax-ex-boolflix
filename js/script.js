@@ -1,57 +1,55 @@
 $(document).ready(function (){
   // quando clicco nel bottone
-  $('button').on('click', function (){
-    // nella classe dentro le ('.cover').html('') mi svuota il campo in html
-    $('.cover').html('');
-    // quando inserisco qualcosa nell'input mi prende il valore .val().toLowerCase(), anche con l'iniziale in minuscolo
-    var query = $("input").val().toLowerCase();
-    // nella barra dell'input quando clicco sul bottone svuoto il campo del valore .val('').focus
-    $('input').val('').focus();
-    if(query != '') {
-      $.ajax(
-        {
-          url: 'https://api.themoviedb.org/3/search/movie',
-          method: 'GET',
-          data: {
-            api_key: 'ed6b74196763d1becc194df37b95d2fd',
-            query: query
-          },
-          success: function (data) {
-            // console.log(query);
-            // console.log(data);
-            var films = data.results;
-            // console.log(films);
-            if(films.length > 0){
-              printFilms(films);
-
-            }
-          },
-          error: function (request, state, errors) {
-            console.log(errors);
-          }
-        });
+  $('input').keypress(function (event){
+    if (event.which == 13) {
+      // nella classe dentro le ('.cover').html('') mi svuota il campo in html
+      $('.cover').html('');
+      // quando inserisco qualcosa nell'input mi prende il valore .val().toLowerCase(), anche con l'iniziale in minuscolo
+      var query = $("input").val().toLowerCase();
+      // nella barra dell'input quando clicco sul bottone svuoto il campo del valore .val('').focus
+      $('input').val('').focus();
+      if(query != '') {
         $.ajax(
           {
-            url: 'https://api.themoviedb.org/3/search/tv',
+            url: 'https://api.themoviedb.org/3/search/movie',
             method: 'GET',
             data: {
               api_key: 'ed6b74196763d1becc194df37b95d2fd',
               query: query
             },
             success: function (data) {
-              // console.log(query);
-              // console.log(data);
-              var serieTv = data.results;
-              console.log(serieTv);
-              if(serieTv.length > 0) {
-                printSerieTv(serieTv);
+              var films = data.results;
+              if(films.length > 0){
+                printFilms(films);
               }
             },
             error: function (request, state, errors) {
               console.log(errors);
             }
-          }
-        );
+          });
+          $.ajax(
+            {
+              url: 'https://api.themoviedb.org/3/search/tv',
+              method: 'GET',
+              data: {
+                api_key: 'ed6b74196763d1becc194df37b95d2fd',
+                query: query
+              },
+              success: function (data) {
+                // console.log(query);
+                // console.log(data);
+                var serieTv = data.results;
+                console.log(serieTv);
+                if(serieTv.length > 0) {
+                  printSerieTv(serieTv);
+                }
+              },
+              error: function (request, state, errors) {
+                console.log(errors);
+              }
+            }
+          );
+        }
     }
   });
 });

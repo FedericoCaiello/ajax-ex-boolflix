@@ -6,14 +6,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.js" integrity="sha256-v28e/OFwH4PmlZT+LbqfwlMOE1hImPNesl1Ha52e6pk=" crossorigin="anonymous"></script>
-    <title></title>
+    <title>Netflix</title>
   </head>
   <body>
+    <header>
+      <input type="text" name="" value="" placeholder="scrivi il titolo di un film">
 
-    <input type="text" name="" value="" placeholder="scrivi il titolo di un film">
-    <button type="button" name="button">Invio</button>
-    <ul class="cover">
-    </ul>
+    </header>
+
+    <main>
+      <ul class="cover">
+      </ul>
+
+    </main>
+
 
     <script id="entry-template" type="text/x-handlebars-template">
       <li>Film: {{title}} - {{original_title}} - {{{original_language}}}</li>

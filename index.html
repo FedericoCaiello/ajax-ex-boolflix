@@ -10,37 +10,61 @@
   </head>
   <body>
     <header>
-      <input type="text" name="" value="" placeholder="scrivi il titolo di un film">
+      <div class="header-left">
+        <img class="logo" src="img/Netflix-Logo.png" alt="">
+
+      </div>
+      <div class="header-right">
+        <input type="text" name="" value="" placeholder="scrivi il titolo di un film">
+      </div>
 
     </header>
 
     <main>
-      <ul class="cover">
-      </ul>
+      <div class="cover">
+
+      </div>
+      <div class="series">
+
+      </div>
 
     </main>
 
-
     <script id="entry-template" type="text/x-handlebars-template">
-      <li>Film: {{title}} - {{original_title}} - {{{original_language}}}</li>
-      <li>
-        stars: {{{vote_average}}}
-      </li>
-      <li>
-        <img src="{{{poster_path}}}" alt="">
-      </li>
-
+      <div class="info">
+        <div class="wrapper_img">
+          <img class="poster_size" src="{{{poster_path}}}" alt="">
+        </div>
+        <h2>Film: {{title}}</h2>
+        <h2>
+          {{original_title}}
+        </h2>
+        <h2>{{{original_language}}}</h2>
+        <p>
+          stars: {{{vote_average}}}
+        </p>
+      </div>
 
     </script>
 
     <script id="second-template" type="text/x-handlebars-template">
-      <li>serie tv: {{name}} - {{original_name}} - {{{original_language}}}</li>
-      <li>
-        stars: {{{vote_average}}}
-      </li>
-      <li>
-        <img src="{{{poster_path}}}" alt="">
-      </li>
+      <div class="info">
+        <div class="wrapper_img">
+          <img class="poster_size" src="{{{poster_path}}}" alt="">
+        </div>
+        <h2>serie tv: {{name}}</h2>
+        <h2>
+          {{original_name}}
+        </h2>
+        <h2>
+          {{{original_language}}}
+        </h2>
+        <p>
+          stars: {{{vote_average}}}
+        </p>
+
+      </div>
+
 
     </script>
 

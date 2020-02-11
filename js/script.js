@@ -1,9 +1,10 @@
 $(document).ready(function (){
-  // quando clicco nel bottone
+  // quando premo invio nell'input
   $('input').keypress(function (event){
     if (event.which == 13) {
       // nella classe dentro le ('.cover').html('') mi svuota il campo in html
       $('.cover').html('');
+      $('.series').html('');
       // quando inserisco qualcosa nell'input mi prende il valore .val().toLowerCase(), anche con l'iniziale in minuscolo
       var query = $("input").val().toLowerCase();
       // nella barra dell'input quando clicco sul bottone svuoto il campo del valore .val('').focus
@@ -36,8 +37,6 @@ $(document).ready(function (){
                 query: query
               },
               success: function (data) {
-                // console.log(query);
-                // console.log(data);
                 var serieTv = data.results;
                 console.log(serieTv);
                 if(serieTv.length > 0) {
@@ -52,6 +51,12 @@ $(document).ready(function (){
         }
     }
   });
+  // $(document).on('mouseenter', '.info', function (){
+  //   $(this).find('.wrapper_img').hide();
+  // });
+  // $(document).on('mouseleave', '.info', function (){
+  //   $(this).find('.wrapper_img').show();
+  // });
 });
 
 function printFilms (films) {
@@ -83,7 +88,7 @@ function printSerieTv (serie) {
        poster_path: posterPrint(questaSerie.poster_path)
      };
      var html = template(context);
-     $('.cover').append(html);
+     $('.series').append(html);
   }
 }
 function printStars(voto) {
@@ -119,7 +124,7 @@ function printFlags(stringa) {
     'zh'
   ];
   if (bandiere.includes(stringa)) {
-    stringa = '<img class="lang" src="img/flag-of-' + stringa + '.png" alt="language">';
+    stringa = '<img class="size" src="img/flag-of-' + stringa + '.png" alt="language">';
   }
   return stringa;
 }

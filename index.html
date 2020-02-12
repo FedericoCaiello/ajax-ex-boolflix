@@ -15,15 +15,17 @@
 
       </div>
       <div class="header-right">
-        <input type="text" name="" value="" placeholder="scrivi il titolo di un film">
+        <input type="text" name="" value="" placeholder="scrivi il titolo di un film o di una serie tv">
       </div>
 
     </header>
 
     <main>
+      <h3>Films</h3>
       <div class="cover">
 
       </div>
+      <h3>Series TV</h3>
       <div class="series">
 
       </div>
@@ -35,13 +37,13 @@
         <div class="wrapper_img">
           <img class="poster_size" src="{{{poster_path}}}" alt="">
         </div>
-        <h2>Film: {{title}}</h2>
+        <h2 class="title">{{title}}</h2>
         <h2>
           {{original_title}}
         </h2>
         <h2>{{{original_language}}}</h2>
-        <p>
-          stars: {{{vote_average}}}
+        <p class="stelle">
+          {{{vote_average}}}
         </p>
       </div>
 
@@ -52,15 +54,15 @@
         <div class="wrapper_img">
           <img class="poster_size" src="{{{poster_path}}}" alt="">
         </div>
-        <h2>serie tv: {{name}}</h2>
+        <h2 class="title">{{name}}</h2>
         <h2>
           {{original_name}}
         </h2>
         <h2>
           {{{original_language}}}
         </h2>
-        <p>
-          stars: {{{vote_average}}}
+        <p class="stelle">
+          {{{vote_average}}}
         </p>
 
       </div>

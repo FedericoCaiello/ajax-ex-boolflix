@@ -67,3 +67,16 @@ main {
   height: 100%;
   width: 100%;
 }
+h2 {
+  font-size: 16px;
+  font-family: sans-serif;
+}
+.title {
+  color: red;
+}
+h3 {
+  text-align: center;
+  font-size: 50px;
+  font-family: sans-serif;
+  font-weight: bold;
+}

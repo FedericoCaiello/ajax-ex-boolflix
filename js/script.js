@@ -7,57 +7,45 @@ $(document).ready(function (){
       $('.series').html('');
       // quando inserisco qualcosa nell'input mi prende il valore .val().toLowerCase(), anche con l'iniziale in minuscolo
       var query = $("input").val().toLowerCase();
+      var urlFilm = 'https://api.themoviedb.org/3/search/movie';
+      var urlSerie = 'https://api.themoviedb.org/3/search/tv';
+      var tipologiaTv = 'serieTv';
+      var tipologiaFilm = 'film';
       // nella barra dell'input quando clicco sul bottone svuoto il campo del valore .val('').focus
       $('input').val('').focus();
       if(query != '') {
-        $.ajax(
-          {
-            url: 'https://api.themoviedb.org/3/search/movie',
-            method: 'GET',
-            data: {
-              api_key: 'ed6b74196763d1becc194df37b95d2fd',
-              query: query
-            },
-            success: function (data) {
-              var films = data.results;
-              if(films.length > 0){
-                printFilms(films);
-              }
-            },
-            error: function (request, state, errors) {
-              console.log(errors);
-            }
-          });
-          $.ajax(
-            {
-              url: 'https://api.themoviedb.org/3/search/tv',
-              method: 'GET',
-              data: {
-                api_key: 'ed6b74196763d1becc194df37b95d2fd',
-                query: query
-              },
-              success: function (data) {
-                var serieTv = data.results;
-                console.log(serieTv);
-                if(serieTv.length > 0) {
-                  printSerieTv(serieTv);
-                }
-              },
-              error: function (request, state, errors) {
-                console.log(errors);
-              }
-            }
-          );
+        search (urlFilm, query, tipologiaFilm);
+        search (urlSerie, query, tipologiaTv);
         }
     }
   });
-  // $(document).on('mouseenter', '.info', function (){
-  //   $(this).find('.wrapper_img').hide();
-  // });
-  // $(document).on('mouseleave', '.info', function (){
-  //   $(this).find('.wrapper_img').show();
-  // });
 });
+
+function search (url, query, tipologia) {
+  $.ajax(
+    {
+      url: url,
+      method: 'GET',
+      data: {
+        api_key: 'ed6b74196763d1becc194df37b95d2fd',
+        query: query
+      },
+      success: function (data) {
+        var films = data.results;
+        if(films.length > 0){
+          if (tipologia == 'serieTv') {
+            printSerieTv(films)
+
+          }else {
+            printFilms(films);
+          }
+        }
+      },
+      error: function (request, state, errors) {
+        console.log(errors);
+      }
+    });
+}
 
 function printFilms (films) {
   var source = $("#entry-template").html();
